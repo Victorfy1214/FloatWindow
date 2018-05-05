@@ -1,6 +1,10 @@
 # FloatWindow
 javaScript 和 CSS结合实现的地图点击查询窗口界面
 
+写在前面：
+====
+本人能力有限，项目也有许多地方有待完善，如给您带来不便还望谅解，同时也希望各路大神能提出宝贵的建议和意见，大家共同学习，共同进步
+
 项目介绍：
 ====
 一个简单的地图信息点击查询界面，采用悬浮窗口的样式设计。
@@ -77,4 +81,15 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
             },500);
     });
  ```
- 
+封装方法介绍
+====
+
+* `setMapClickListener`： 此监听方法用于回调地图的经纬度变化，参数`ClickCallBack`，传入你的回调函数
+* `addInfo`：该方法用于添加窗口展板信息，包含两个参数`Type`和`Value`,Type值不同，展板图标不同，Value为展板具体信息
+* `closeFloatWindow`：该方法用于关闭悬浮展板
+* `closeLoadingAnimation`：该方法用于关闭加载动画
+* `setChartBtnListener`：设置图标按钮的功能*此功能为本人项目需要*,参数`clickCallBack`，传入你的回调函数
+
+以上方法均通过对象调用，如floatWindow.setMapClickListener();
+
+* *`DisabledMapClickListener`: 该`函数`用来禁用FloatWindow的监听，请在需要的地方直接调用方法，如 `DisabledMapClickListener（true）;`，重新启用监听请使用 `DisabledMapClickListener（false）;`
