@@ -88,7 +88,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 * `addInfo`：该方法用于添加窗口展板信息，包含两个参数`Type`和`Value`,Type值不同，展板图标不同，Value为展板具体信息
 * `closeFloatWindow`：该方法用于关闭悬浮展板
 * `closeLoadingAnimation`：该方法用于关闭加载动画
-* `setChartBtnListener`：设置图标按钮的功能*此功能为本人项目需要*,参数`clickCallBack`，传入你的回调函数
+* `setChartBtnListener`：设置图表按钮的功能*此功能为本人项目需要*,参数`clickCallBack`，传入你的回调函数
 
 以上方法均通过对象调用，如floatWindow.setMapClickListener();
 
