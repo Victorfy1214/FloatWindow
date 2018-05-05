@@ -1,0 +1,19 @@
+html,body {
+    height:100%;
+    margin:0;
+    padding:0;
+    background-color: aliceblue;
+    font-family:'微软雅黑';
+    zoom:1;
+    transform: scale(1);
+
+}
+
+#mapDiv{
+
+    height:100%;
+    margin:0;
+    padding:0;
+    z-index: 0;
+}
+

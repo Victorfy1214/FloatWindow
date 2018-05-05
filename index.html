@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--font-awesome样式-->
+    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+
+    <link rel="stylesheet" href="css/map.css"><link>
+
+    <link rel="stylesheet" href="css/floatWindow.css"><link>
+    <title>浮动窗口</title>
+</head>
+
+<body>
+<!--地图DIV-->
+<div id = "mapDiv"></div>
+
+<!--floatWindow界面-->
+<div class = "root-point unSelectable">
+    <i class="fa fa-times menu-close" aria-hidden="true" title="关闭"></i>
+    <i class="fa fa-bar-chart menu-chart"aria-hidden="true"  title="统计表"></i>
+
+    <div class="loading-spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+
+    <div class = "content-div"></div>
+    <div class = "info-line"></div>
+    <div class="dot"></div>
+    <div class="pulse-inner"></div>
+    <div class="pulse-outer"></div>
+</div>
+
+<script src="leaflet/leaflet.js"></script>
+<script type="text/javascript" src="js/floatWindow.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+
+<script>
+    //新建floarWindow对象
+    let floatWindow = new FloatWindow(map);
+
+
+    //点击地图时的监听函数
+    floatWindow.setMapClickListener(function(latLng){
+        //输出点击此处经纬度
+        console.log(latLng.lat + " ; " + latLng.lng);
+
+            //进行数据查询后进行数据显示
+            setTimeout(function () {
+                //传2个参数，Type 和 Value
+                // Type值可取WND、QY、以及其他任意值
+                //填写不同TYPE会有不同图标
+                //Value为要显示的数值 如 "经度：121"
+                floatWindow.addInfo('WND',latLng.lng.toFixed(3) + " ; " + latLng.lat.toFixed(3));
+            },500);
+    });
+
+    //禁用MapClick监听事件
+    DisabledMapClickListener(false);
+
+    //图表按钮点击监听事件
+    floatWindow.setChartBtnListener(function(){
+        console.log('ok');
+    })
+
+</script>
+
+</body>
+</html>
