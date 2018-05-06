@@ -14,6 +14,10 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 ====
 通过`经纬度`进行数据库数据查询，将`主要数据`进行窗口展示，建议在显示信息很多的情况下增加详细信息展板
 
+兼容性
+====
+已测试Google chrome浏览器、 FireFox浏览器、IE11浏览器可用，其他浏览器请自测
+
 效果预览
 ====
 ![Image text](https://raw.githubusercontent.com/Victorfy1214/FloatWindow/master/preview/GIF.gif)
