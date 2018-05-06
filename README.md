@@ -16,7 +16,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 
 兼容性
 ====
-已测试Google chrome浏览器、 FireFox浏览器、IE11浏览器可用，其他浏览器请自测
+已测试Google Chrome浏览器、 FireFox浏览器、IE11浏览器可用，其他浏览器请自测
 
 效果预览
 ====
