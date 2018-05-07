@@ -36,6 +36,7 @@ let dealDrag = false;
 
 let dealClick = true;
 
+let dealDragMouseUp = false;
 
 //定义封装函数
 function FloatWindow(param){
@@ -169,35 +170,50 @@ function Drag_MouseMove(event){
         y = event.clientY - clickY +30;
     else
         y = event.clientY - clickY +50;
+    if(clickX + content_info.offset().left -  event.clientX  >=0 || clickY + content_info.offset().top - event.clientY >= 3)
+    {
 
-    //为信息显示框赋值经纬度信息
-     content_info.html('');
-    //将鼠标点击位置转化成屏幕坐标
-     const Client = map_obj.containerPointToLatLng(L.point(x,y + top_fixed));
 
-     content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng"> '+"经度:" + Client.lng .toFixed(3) + " , 纬度:" + Client.lat.toFixed(3) +'</div> </div>');
+        //为信息显示框赋值经纬度信息
+        content_info.html('');
+        //将鼠标点击位置转化成屏幕坐标
+        const Client = map_obj.containerPointToLatLng(L.point(x,y + top_fixed));
 
-     setPosition(x,y + top_fixed);
+        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng"> '+"经度:" + Client.lng .toFixed(3) + " , 纬度:" + Client.lat.toFixed(3) +'</div> </div>');
+
+
+        dealDragMouseUp = true;
+        click_Point = Client;
+    }
+
+    else
+        dealDragMouseUp = false;
+
+
+    setPosition(x,y + top_fixed);
 
     setContentInfoPosition(x,y + top_fixed);
 
-    click_Point = Client;
 
 }
 
 function Drag_MouseUp(){
-    $(window).off('mousemove');
-    $(window).off('mouseup');
+
     //当误触地图拖动时不允许执行地图拖动的函数
     dealMapMove = false;
 
-	//显示loading加载动画
-    setLoadingDisplayMode("block");
-    if(dealDrag)
+    if(dealDrag && dealDragMouseUp){
+        //显示loading加载动画
+        setLoadingDisplayMode("block");
         controlCount(CallBackFunction,click_Point,900);
+        dealDragMouseUp = false;
+    }
+
 
     dealClick = true;
 
+    $(window).off('mousemove');
+    $(window).off('mouseup');
 }
 
 //定义地图开始挪动时的监听
