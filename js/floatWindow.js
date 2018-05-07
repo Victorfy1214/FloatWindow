@@ -31,11 +31,11 @@ let CallBackFunction;
 let disable_listener = false;
 //处理点击或拖动控件时无处地图拖动的控制变量
 let dealMapMove = true;
-//
+//处理拖拽，拖拽时不触发点击的回调函数
 let dealDrag = false;
-
+//处理点击，点击时不触发拖拽的回调函数
 let dealClick = true;
-
+//处理展板点击时重复加载数据
 let dealDragMouseUp = false;
 
 //定义封装函数
@@ -235,10 +235,11 @@ function MapMoveEnd(){
 
     map_obj.on('moveend',function(){
         const bounds = map_obj.getBounds();
-        if(bounds.contains(click_Point)){
+		
+        if(fw_display && bounds.contains(click_Point) ){
             const new_position =  map_obj.latLngToContainerPoint(click_Point);
-            if(fw_display)
-                setPosition(new_position.x,new_position.y );
+            
+            setPosition(new_position.x,new_position.y );
 
             const child_count = content_info.children().length;
             const content_height = content_info.height();
