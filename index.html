@@ -22,7 +22,7 @@
 <!--floatWindow界面-->
 <div class = "root-point unSelectable">
     <i class="fa fa-times menu-close" aria-hidden="true" title="关闭"></i>
-    <i class="fa fa-bar-chart menu-chart"aria-hidden="true"  title="统计表"></i>
+    <i class="fa fa-bar-chart menu-chart" aria-hidden="true"  title="统计表"></i>
 
     <div class="loading-spinner">
         <div class="bounce1"></div>
@@ -50,15 +50,19 @@
     floatWindow.setMapClickListener(function(latLng){
         //输出点击此处经纬度
         console.log(latLng.lat + " ; " + latLng.lng);
-
+        //获取处理后的结果，避免多次回调，传递参数latlng，回调函数传回参数value为经纬度
+        floatWindow.getDealResult(latLng,function(value){
             //进行数据查询后进行数据显示
             setTimeout(function () {
                 //传2个参数，Type 和 Value
                 // Type值可取WND、QY、以及其他任意值
                 //填写不同TYPE会有不同图标
                 //Value为要显示的数值 如 "经度：121"
-                floatWindow.addInfo('WND',latLng.lng.toFixed(3) + " ; " + latLng.lat.toFixed(3));
-            },500);
+                floatWindow.addInfo('WND',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
+                floatWindow.addInfo('QY',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
+            },1000);
+        });
+
     });
 
     //禁用MapClick监听事件

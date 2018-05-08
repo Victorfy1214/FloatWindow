@@ -37,7 +37,11 @@ let dealDrag = false;
 let dealClick = true;
 //处理展板点击时重复加载数据
 let dealDragMouseUp = false;
-
+//判定是否删除之前的展板内容
+let dealDelete;
+//判断删除展板内容之前的子节点数目
+let child_count_before;
+//let child_count_after
 //定义封装函数
 function FloatWindow(param){
     //将地图对象传值到全局变量
@@ -88,15 +92,15 @@ FloatWindow.prototype.setMapClickListener = function (ClickCallBack) {
 
         //为信息显示框赋值经纬度信息
         content_info.html('');
-        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng"> '+"经度:" + click_Point.lng .toFixed(3) + " , 纬度:" + click_Point.lat.toFixed(3) +'</div> </div>');
+        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng">'+((click_Point.lng<180)?(click_Point.lng.toFixed(3)+"°E"):(360-click_Point.lng).toFixed(3)+"°W")+" ,"+(click_Point.lat>0?click_Point.lat.toFixed(3)+"°N": -click_Point.lat.toFixed(3)+"°S") +'</div> </div>');
 
 
         //显示loading加载动画
         setLoadingDisplayMode("block");
-
+		
         if(dealClick)
             controlCount(CallBackFunction,click_Point,900);
-
+		
     });
 
 };
@@ -124,11 +128,26 @@ FloatWindow.prototype.closeLoadingAnimation = function () {
     setLoadingDisplayMode('none');
 };
 
+//添加获取处理后的数据接口
+FloatWindow.prototype.getDealResult = function (params,callback) {
+    if(dealDelete !== params){
+        child_count_before = content_info.children().length;
+        $('.info-message').remove();
+        setLoadingDisplayMode('block');
+        if(child_count_before >1)
+            setContentInfoPosition(0,dot_obj.offset().top);
+
+        callback(params);
+    }
+
+};
 
 //禁用MapClick的监听事件
 function DisabledMapClickListener (value) {
     disable_listener = value;
 }
+
+
 
 let timeout;
 function controlCount(func,params, wait) {
@@ -136,15 +155,12 @@ function controlCount(func,params, wait) {
     clearTimeout(timeout);
     timeout = setTimeout(function(){
         timeout = null;
-        func(params);
+        if(params !== null)
+            func(params);
     }, wait);
 }
 
 function Drag_MouseDown(event){
-
-    dealDrag = true;
-
-    dealClick = false;
 
     $(window).on('mousemove',Drag_MouseMove);
     $(window).on('mouseup',Drag_MouseUp);
@@ -157,6 +173,9 @@ function Drag_MouseDown(event){
 }
 
 function Drag_MouseMove(event){
+	dealClick = false;
+	dealDrag = true;
+	
     let e = event || window.event;//兼容event事件处理
 
     const child_count = content_info.children().length;
@@ -173,15 +192,13 @@ function Drag_MouseMove(event){
     if(clickX + content_info.offset().left -  event.clientX  >=0 || clickY + content_info.offset().top - event.clientY >= 3)
     {
 
-
         //为信息显示框赋值经纬度信息
         content_info.html('');
         //将鼠标点击位置转化成屏幕坐标
         const Client = map_obj.containerPointToLatLng(L.point(x,y + top_fixed));
 
-        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng"> '+"经度:" + Client.lng .toFixed(3) + " , 纬度:" + Client.lat.toFixed(3) +'</div> </div>');
-
-
+        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng"> '+((Client.lng<180)?(Client.lng.toFixed(3)+"°E"):(360-Client.lng).toFixed(3)+"°W")+" ,"+(Client.lat>0?Client.lat.toFixed(3)+"°N": -Client.lat.toFixed(3)+"°S") +'</div> </div>');
+        
         dealDragMouseUp = true;
         click_Point = Client;
     }
@@ -205,6 +222,7 @@ function Drag_MouseUp(){
     if(dealDrag && dealDragMouseUp){
         //显示loading加载动画
         setLoadingDisplayMode("block");
+		//$(".info-message").remove();
         controlCount(CallBackFunction,click_Point,900);
         dealDragMouseUp = false;
     }
@@ -340,11 +358,6 @@ function addContent(type,value){
     //fa-file-word-o 风
     //fa-file-text-o 其他
 
-    const child_count_before = content_info.children().length;
-
-    $(".info-message").remove();
-    const child_count_after = content_info.children().length;
-
     let icon_str = "";
     if(type === "QY")//气压
     {
@@ -356,15 +369,17 @@ function addContent(type,value){
         icon_str = '<i class="fa icon-location fa-file-text-o" aria-hidden="true"></i>';
     }
     content_info.append('<div  class = "info-message"><div class = "separation-line"></div><div style="display:flex;align-items:center;">'+icon_str +'<div class = "fw-latLng"> '+value +'</div> </div></div>');
-
+   // child_count_after = content_info.children().length;
     setLoadingDisplayMode("none");
 
     const content_height = content_info.height();
     const content_top = content_info.offset().top;
     const child_count = content_info.children().length;
-    if(child_count_before - child_count_after <=0)
-        setContentInfoPosition(0,  content_top + (content_height / child_count));
+
+    setContentInfoPosition(0,  content_top + (content_height / child_count));
 
     //允许执行地图拖动的函数
     dealMapMove = true;
+	
+	
 }
