@@ -71,18 +71,18 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
     
         console.log(latLng.lat + " ; " + latLng.lng);//打印经纬度信息
         
-           //进行查询操作并调用信息展板传递信息
-           
-           setTimeout(function () {
-           
+        //获取处理后的结果，避免多次回调，传递参数latlng，回调函数传回参数value为经纬度
+        floatWindow.getDealResult(latLng,function(value){
+            //进行数据查询后进行数据显示
+            setTimeout(function () {
                 //传2个参数，Type 和 Value
                 // Type值可取WND、QY、以及其他任意值
                 //填写不同TYPE会有不同图标
                 //Value为要显示的数值 如 "经度：121"
-                
-                floatWindow.addInfo('WND',latLng.lng.toFixed(3) + " ; " + latLng.lat.toFixed(3));
-                
-            },500);
+                floatWindow.addInfo('WND',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
+                floatWindow.addInfo('QY',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
+            },1000);
+        });
     });
  ```
 封装方法介绍
@@ -93,6 +93,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 * `closeFloatWindow`：该方法用于关闭悬浮展板
 * `closeLoadingAnimation`：该方法用于关闭加载动画
 * `setChartBtnListener`：设置图表按钮的功能*此功能为本人项目需要*,参数`clickCallBack`，传入你的回调函数
+* `getDealResult`：用于判断经纬度信息是否改变，解决展板数据重复问题，参数latlng 经纬度对象，callback（Value）回调函数，Value为处理后的经纬度
 
 以上方法均通过对象调用，如floatWindow.setMapClickListener();
 
