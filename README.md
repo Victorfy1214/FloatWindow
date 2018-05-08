@@ -93,7 +93,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 * `closeFloatWindow`：该方法用于关闭悬浮展板
 * `closeLoadingAnimation`：该方法用于关闭加载动画
 * `setChartBtnListener`：设置图表按钮的功能*此功能为本人项目需要*,参数`clickCallBack`，传入你的回调函数
-* `getDealResult`：用于判断经纬度信息是否改变，解决展板数据重复问题，参数latlng 经纬度对象，callback（Value）回调函数，Value为处理后的经纬度
+* `getDealResult`：用于判断经纬度信息是否改变，解决展板数据重复问题，参数`latLng` 经纬度对象，`callback（Value）`回调函数，Value为处理后的经纬度
 
 以上方法均通过对象调用，如floatWindow.setMapClickListener();
 
