@@ -4,7 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--font-awesome样式-->
-    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
     <script src="js/jquery.min.js"></script>
 
     <link rel="stylesheet" href="leaflet/leaflet.css" />
@@ -21,8 +22,9 @@
 
 <!--floatWindow界面-->
 <div class = "root-point unSelectable">
-    <i class="fa fa-times menu-close" aria-hidden="true" title="关闭"></i>
-    <i class="fa fa-bar-chart menu-chart" aria-hidden="true"  title="统计表"></i>
+
+    <i class="fas fa-times menu-close" title="关闭"></i>
+    <i class="fas fa-chart-bar menu-chart"  title="统计表"></i>
 
     <div class="loading-spinner">
         <div class="bounce1"></div>
@@ -58,8 +60,8 @@
                 // Type值可取WND、QY、以及其他任意值
                 //填写不同TYPE会有不同图标
                 //Value为要显示的数值 如 "经度：121"
-                floatWindow.addInfo('WND',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
-                floatWindow.addInfo('QY',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
+                floatWindow.addInfo('WND','Value1');
+                floatWindow.addInfo('QY','Value1');
             },1000);
         });
 

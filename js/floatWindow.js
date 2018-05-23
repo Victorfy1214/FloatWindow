@@ -92,7 +92,7 @@ FloatWindow.prototype.setMapClickListener = function (ClickCallBack) {
 
         //为信息显示框赋值经纬度信息
         content_info.html('');
-        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng">'+((click_Point.lng<180)?(click_Point.lng.toFixed(3)+"°E"):(360-click_Point.lng).toFixed(3)+"°W")+" ,"+(click_Point.lat>0?click_Point.lat.toFixed(3)+"°N": -click_Point.lat.toFixed(3)+"°S") +'</div> </div>');
+        content_info.append('<div style="display:flex;align-items:center;"> <i class="icon-location fas fa-map-marker-alt" aria-hidden="true"></i> <div class = "fw-latLng">'+((click_Point.lng<180)?(click_Point.lng.toFixed(3)+"°E"):(360-click_Point.lng).toFixed(3)+"°W")+" ,"+(click_Point.lat>0?click_Point.lat.toFixed(3)+"°N": -click_Point.lat.toFixed(3)+"°S") +'</div> </div>');
 
 
         //显示loading加载动画
@@ -189,7 +189,7 @@ function Drag_MouseMove(event){
         y = event.clientY - clickY +30;
     else
         y = event.clientY - clickY +50;
-    if(clickX + content_info.offset().left -  event.clientX  >=0 || clickY + content_info.offset().top - event.clientY >= 3)
+    if(clickX + content_info.offset().left -  event.clientX  >=0 || clickY + content_info.offset().top - event.clientY >= 0)
     {
 
         //为信息显示框赋值经纬度信息
@@ -197,7 +197,7 @@ function Drag_MouseMove(event){
         //将鼠标点击位置转化成屏幕坐标
         const Client = map_obj.containerPointToLatLng(L.point(x,y + top_fixed));
 
-        content_info.append('<div style="display:flex;align-items:center;"> <i class="fa fa-map-marker icon-location" aria-hidden="true"></i> <div class = "fw-latLng"> '+((Client.lng<180)?(Client.lng.toFixed(3)+"°E"):(360-Client.lng).toFixed(3)+"°W")+" ,"+(Client.lat>0?Client.lat.toFixed(3)+"°N": -Client.lat.toFixed(3)+"°S") +'</div> </div>');
+        content_info.append('<div style="display:flex;align-items:center;"> <i class="icon-location fas fa-map-marker-alt" aria-hidden="true"></i> <div class = "fw-latLng"> '+((Client.lng<180)?(Client.lng.toFixed(3)+"°E"):(360-Client.lng).toFixed(3)+"°W")+" ,"+(Client.lat>0?Client.lat.toFixed(3)+"°N": -Client.lat.toFixed(3)+"°S") +'</div> </div>');
         
         dealDragMouseUp = true;
         click_Point = Client;
@@ -361,12 +361,12 @@ function addContent(type,value){
     let icon_str = "";
     if(type === "QY")//气压
     {
-        icon_str = '<i class="fa icon-location fa-file-powerpoint-o" aria-hidden="true"></i>';
+        icon_str = '<i class="icon-location far fa-file-powerpoint"></i>';
     }else if(type === "WND")//风
     {
-        icon_str = '<i class="fa icon-location fa-file-word-o" aria-hidden="true"></i>';
+        icon_str = '<i class="icon-location far fa-file-word"></i>';
     }else{//其他情况
-        icon_str = '<i class="fa icon-location fa-file-text-o" aria-hidden="true"></i>';
+        icon_str = '<i class="icon-location far fa-file-alt"></i>';
     }
     content_info.append('<div  class = "info-message"><div class = "separation-line"></div><div style="display:flex;align-items:center;">'+icon_str +'<div class = "fw-latLng"> '+value +'</div> </div></div>');
    // child_count_after = content_info.children().length;

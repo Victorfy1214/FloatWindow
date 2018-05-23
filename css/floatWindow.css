@@ -120,36 +120,32 @@
 /*显示关闭按钮的div*/
 .menu-close{
     position:absolute;
-    width:20px;
-    height:20px;
+    width:22px;
+    height:22px;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     background-color: #c20702;
     text-align: center;
-    line-height: 20px;
-    font-weight: lighter;
+    line-height: 22px;
     color:white;
-    padding:2px;
-    font-size: 10px;
+    font-size: 0.8rem;
     cursor: pointer;
     box-shadow: 0 2px 4px 0 rgba(188, 7, 2, 0.2), 0 2px 4px 0 rgba(188, 7, 2, 0.19);
 }
 /*显示图表按钮的div*/
 .menu-chart{
     position:absolute;
-    width:20px;
-    height:20px;
+    width:22px;
+    height:22px;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     background-color: #c20702;
     text-align: center;
-    line-height: 20px;
-    font-weight: lighter;
-    padding:2px;
+    line-height: 22px;
     color:white;
-    font-size: 10px;
+    font-size: 0.6rem;
     cursor: pointer;
     box-shadow: 0 2px 4px 0 rgba(188, 7, 2, 0.2), 0 2px 4px 0 rgba(188, 7, 2, 0.19);
 }
@@ -163,11 +159,9 @@
     -webkit-border-radius: 50%;
     text-align: center;
     line-height: 20px;
-    font-weight: lighter;
-    padding:2px;
     color:white;
     margin-top: 2px;
-    font-size: 15px;
+    font-size: 0.96rem;
     float:left;
     padding-right: 1px;
 }
