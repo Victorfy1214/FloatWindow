@@ -32,7 +32,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
  ```
  引用font-awesome样式
  ```html
- <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
  ```
  引用JQuery库
  ```html
@@ -40,9 +40,10 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
  ```
  在`body`标签中添加如下标签
  ```html
- <div class = "root-point unSelectable">
-    <i class="fa fa-times menu-close" aria-hidden="true" title="关闭"></i>
-    <i class="fa fa-bar-chart menu-chart"aria-hidden="true"  title="统计表"></i>
+<div class = "root-point unSelectable">
+
+    <i class="fas fa-times menu-close" title="关闭"></i>
+    <i class="fas fa-chart-bar menu-chart"  title="统计表"></i>
 
     <div class="loading-spinner">
         <div class="bounce1"></div>
