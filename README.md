@@ -79,7 +79,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 				            //icon为font-awasome图标代码
                 //Value为要显示的数据
                 floatWindow.addInfo('far fa-file-alt','Value1');
-                floatWindow.addInfo('far fa-file-altfar fa-file-alt','Value2');
+                floatWindow.addInfo('far fa-file-alt','Value2');
             },1000);
         });
     });
