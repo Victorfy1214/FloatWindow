@@ -43,7 +43,6 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 <div class = "root-point unSelectable">
 
     <i class="fas fa-times menu-close" title="关闭"></i>
-    <i class="fas fa-chart-bar menu-chart"  title="统计表"></i>
 
     <div class="loading-spinner">
         <div class="bounce1"></div>
@@ -76,12 +75,11 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
         floatWindow.getDealResult(latLng,function(value){
             //进行数据查询后进行数据显示
             setTimeout(function () {
-                //传2个参数，Type 和 Value
-                // Type值可取WND、QY、以及其他任意值
-                //填写不同TYPE会有不同图标
-                //Value为要显示的数值 如 "经度：121"
-                floatWindow.addInfo('WND',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
-                floatWindow.addInfo('QY',value.lng.toFixed(3) + " ; " + value.lat.toFixed(3));
+                //传2个参数icon,Value
+				            //icon为font-awasome图标代码
+                //Value为要显示的数据
+                floatWindow.addInfo('far fa-file-alt','Value1');
+                floatWindow.addInfo('far fa-file-altfar fa-file-alt','Value2');
             },1000);
         });
     });
@@ -90,10 +88,9 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 ====
 
 * `setMapClickListener`： 此监听方法用于回调地图的经纬度变化，参数`ClickCallBack`，传入你的回调函数
-* `addInfo`：该方法用于添加窗口展板信息，包含两个参数`Type`和`Value`,Type值不同，展板图标不同，Value为展板具体信息
+* `addInfo`：该方法用于添加窗口展板信息，包含两个参数`icon`和`Value`,icon值为font-awsome的图标样式代码，Value为展板具体信息
 * `closeFloatWindow`：该方法用于关闭悬浮展板
 * `closeLoadingAnimation`：该方法用于关闭加载动画
-* `setChartBtnListener`：设置图表按钮的功能*此功能为本人项目需要*,参数`clickCallBack`，传入你的回调函数
 * `getDealResult`：用于判断经纬度信息是否改变，解决展板数据重复问题，参数`latLng` 经纬度对象，`callback（Value）`回调函数，Value为处理后的经纬度
 
 以上方法均通过对象调用，如floatWindow.setMapClickListener();
