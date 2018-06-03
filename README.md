@@ -76,7 +76,7 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
             //进行数据查询后进行数据显示
             setTimeout(function () {
                 //传2个参数icon,Value
-				            //icon为font-awasome图标代码
+		//icon为font-awasome图标代码
                 //Value为要显示的数据
                 floatWindow.addInfo('far fa-file-alt','Value1');
                 floatWindow.addInfo('far fa-file-alt','Value2');
