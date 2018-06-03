@@ -15,8 +15,6 @@ let line_info =  $('.info-line');
 let content_info = $('.content-div');
 //定义关闭按钮对象
 let close_btn = $('.menu-close');
-//定义图表按钮对象
-let chart_btn = $('.menu-chart');
 //定义加载动画对象
 let loading_div = $('.loading-spinner');
 //floatWindow对象
@@ -41,7 +39,7 @@ let dealDragMouseUp = false;
 let dealDelete;
 //判断删除展板内容之前的子节点数目
 let child_count_before;
-//let child_count_after
+
 //定义封装函数
 function FloatWindow(param){
     //将地图对象传值到全局变量
@@ -62,7 +60,7 @@ function FloatWindow(param){
     MapMoveEnd();
 }
 
-//添加显示内容接口
+//添加地图点击监听接口
 FloatWindow.prototype.setMapClickListener = function (ClickCallBack) {
 
     CallBackFunction = ClickCallBack;
@@ -115,13 +113,6 @@ FloatWindow.prototype.closeFloatWindow = function () {
     setDisplayMode("none");
 };
 
-//添加图标按钮监听事件接口
-FloatWindow.prototype.setChartBtnListener = function (clickCallBack) {
-    chart_btn.on('click',function(){
-        clickCallBack();
-    });
-
-};
 
 //添加关闭加载动画功能
 FloatWindow.prototype.closeLoadingAnimation = function () {
@@ -148,7 +139,7 @@ function DisabledMapClickListener (value) {
 }
 
 
-
+//防止频繁操作
 let timeout;
 function controlCount(func,params, wait) {
 
@@ -160,6 +151,7 @@ function controlCount(func,params, wait) {
     }, wait);
 }
 
+//拖拽功能，鼠标按下事件函数
 function Drag_MouseDown(event){
 
     $(window).on('mousemove',Drag_MouseMove);
@@ -169,9 +161,11 @@ function Drag_MouseDown(event){
 
     clickX = e.clientX - content_info.offset().left ;
     clickY = e.clientY - content_info.offset().top;
-
+	//阻止事件冒泡
+	return false;
 }
 
+//拖拽功能，鼠标拖动事件函数
 function Drag_MouseMove(event){
 	dealClick = false;
 	dealDrag = true;
@@ -211,9 +205,9 @@ function Drag_MouseMove(event){
 
     setContentInfoPosition(x,y + top_fixed);
 
-
 }
 
+//拖拽功能，鼠标按键抬起事件函数
 function Drag_MouseUp(){
 
     //当误触地图拖动时不允许执行地图拖动的函数
@@ -293,8 +287,7 @@ function setPosition(x,y) {
 
     //设置关闭按钮位置
     setCloseBtnPosition(x,y);
-    //设置图标功能位置
-    setChartBtnPosition(x,y);
+    
     //设置加载动画的位置
     setLoadingPosition(x,y);
 }
@@ -328,13 +321,7 @@ function setPulsePosition(x,y){
 //设置关闭按钮位置
 function setCloseBtnPosition(x,y){
     close_btn.css('left',x + 255);
-    close_btn.css('top',y - 60);
-}
-
-//设置图表按钮位置
-function setChartBtnPosition(x,y){
-    chart_btn.css('left',x + 255);
-    chart_btn.css('top',y - 25);
+    close_btn.css('top',y - 45);
 }
 
 //设置显示信息面板的位置
@@ -353,21 +340,10 @@ function setLineInfoPosition(x,y){
 }
 
 //添加要素信息
-function addContent(type,value){
-    //fa-file-powerpoint-o 大气压
-    //fa-file-word-o 风
-    //fa-file-text-o 其他
-
-    let icon_str = "";
-    if(type === "QY")//气压
-    {
-        icon_str = '<i class="icon-location far fa-file-powerpoint"></i>';
-    }else if(type === "WND")//风
-    {
-        icon_str = '<i class="icon-location far fa-file-word"></i>';
-    }else{//其他情况
-        icon_str = '<i class="icon-location far fa-file-alt"></i>';
-    }
+function addContent(icon,value){
+    
+    let icon_str = '<i class="icon-location ' + icon + '"></i>';
+    
     content_info.append('<div  class = "info-message"><div class = "separation-line"></div><div style="display:flex;align-items:center;">'+icon_str +'<div class = "fw-latLng"> '+value +'</div> </div></div>');
    // child_count_after = content_info.children().length;
     setLoadingDisplayMode("none");

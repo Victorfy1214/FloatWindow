@@ -24,7 +24,6 @@
 <div class = "root-point unSelectable">
 
     <i class="fas fa-times menu-close" title="关闭"></i>
-    <i class="fas fa-chart-bar menu-chart"  title="统计表"></i>
 
     <div class="loading-spinner">
         <div class="bounce1"></div>
@@ -47,7 +46,6 @@
     //新建floarWindow对象
     let floatWindow = new FloatWindow(map);
 
-
     //点击地图时的监听函数
     floatWindow.setMapClickListener(function(latLng){
         //输出点击此处经纬度
@@ -56,12 +54,11 @@
         floatWindow.getDealResult(latLng,function(value){
             //进行数据查询后进行数据显示
             setTimeout(function () {
-                //传2个参数，Type 和 Value
-                // Type值可取WND、QY、以及其他任意值
-                //填写不同TYPE会有不同图标
+                //传2个参数icon,Value
+				//icon为font-awasome图标代码
                 //Value为要显示的数值 如 "经度：121"
-                floatWindow.addInfo('WND','Value1');
-                floatWindow.addInfo('QY','Value1');
+                floatWindow.addInfo('far fa-file-alt','Value1');
+                floatWindow.addInfo('far fa-file-altfar fa-file-alt','Value2');
             },1000);
         });
 
@@ -69,11 +66,6 @@
 
     //禁用MapClick监听事件
     DisabledMapClickListener(false);
-
-    //图表按钮点击监听事件
-    floatWindow.setChartBtnListener(function(){
-        console.log('ok');
-    })
 
 </script>
 
