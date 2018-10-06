@@ -22,6 +22,8 @@ javaScript 和 CSS结合实现的地图点击查询窗口界面
 ====
 ![Image text](https://raw.githubusercontent.com/Victorfy1214/FloatWindow/master/preview/GIF.gif)
 
+[在线Demo演示](https://htmlpreview.github.io/?https://github.com/Victorfy1214/FloatWindow/blob/master/index.html)
+
 使用方法
 ====
 请参照leaflet官网自行创建地图
